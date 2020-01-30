@@ -1,3 +1,4 @@
+// backend logic
 function Ticket(time, age, movie, price) {
   this.time = time,
   this.age = age,
@@ -16,7 +17,7 @@ Ticket.prototype.timeCheck = function (beepis) {
 
 Ticket.prototype.movieCheck = function (beepis) {
   this.movie = beepis;
-  if (this.movie === "star-wars" || this.movie === "joker") {
+  if (this.movie === "Star Wars" || this.movie === "Joker") {
     this.price += 5;
   }
 }
@@ -32,7 +33,7 @@ Ticket.prototype.ageCheck = function (beepis) {
 }
 
 Ticket.prototype.display = function () {
-  return this.time + ":00. the tickets for " + this.movie + " will be " + this.price + "$ at the door."
+  return this.time + ":00. the tickets for " + this.movie + " will be $" + this.price + " at the door."
 }
 
 // front end logic
@@ -52,7 +53,6 @@ $(document).ready(function() {
     purchase.ageCheck(type);
     purchase.display();
     displaying();
-    
   });
 });
 
