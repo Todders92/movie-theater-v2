@@ -5,26 +5,18 @@ function Ticket(time, age, movie, price) {
   this.price = price
 }
 
-function Movie(name,restriction) {
-  this.name = name,
-  this.restriction = restriction
-}
-
 var purchase = new Ticket(0, 0, 0, 10);
-
-
-
 
 Ticket.prototype.timeCheck = function (beepis) {
   this.time = beepis;
-  if (this.time === 0) {
+  if (this.time >= 17) {
     this.price += 2;
   }
 }
 
 Ticket.prototype.movieCheck = function (beepis) {
   this.movie = beepis;
-  if (this.movie === 1) {
+  if (this.movie === "star-wars" || this.movie === "joker") {
     this.price += 5;
   }
 }
@@ -40,14 +32,18 @@ Ticket.prototype.ageCheck = function (beepis) {
 }
 
 Ticket.prototype.display = function () {
-  $(".ticket-time").text(this.time + " the tickets for " + this.movie + " will be " + this.price + "$ at the door.");
-  $(".results").show();
+  return this.time + ":00. the tickets for " + this.movie + " will be " + this.price + "$ at the door."
 }
 
 // front end logic
+var displaying = function () {
+  $(".ticket-time").text(purchase.display());
+  $(".results").show();
+}
+
 $(document).ready(function() {
   $("form").submit(function(event) {
-    var movie = parseInt($("#movie").val());
+    var movie = $("#movie").val();
     var time = parseInt($("#time").val());
     var type = parseInt($("#age").val());
     event.preventDefault();
@@ -55,6 +51,8 @@ $(document).ready(function() {
     purchase.movieCheck(movie);
     purchase.ageCheck(type);
     purchase.display();
+    displaying();
+    
   });
 });
 
